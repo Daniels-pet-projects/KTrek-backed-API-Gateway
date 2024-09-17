@@ -1,0 +1,48 @@
+{
+  "name": "ktrek-backed-api-gateway",
+  "version": "0.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev:manual": "PROJECT_STATUS=development ts-node .",
+    "dev": "PROJECT_STATUS=development nodemon",
+    "build": "PROJECT_STATUS=production tsc -p tsconfig.json",
+    "prod": "PROJECT_STATUS=production node dist/src/index",
+    "lint": "eslint -c .eslintrc src/**/*.ts",
+    "format": "prettier --write 'src/**/*.{ts,json}' --config .prettierrc",
+    "db:start": "npm run db:stop && docker compose up --build partners-db -d",
+    "db:stop": "docker compose stop partners-db",
+    "seeds": "npx prisma db push && npx prisma db seed",
+    "deploy:start": "npm run deploy:stop && npm run build && docker compose up --build -d",
+    "deploy:stop": "docker compose stop"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/autoload": "^5.10.0",
+    "@fastify/env": "^4.4.0",
+    "@fastify/swagger": "^8.15.0",
+    "@fastify/swagger-ui": "^4.1.0",
+    "@fastify/type-provider-json-schema-to-ts": "^3.0.0",
+    "@scalar/fastify-api-reference": "^1.25.10",
+    "fastify": "^4.28.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.9.1",
+    "@fastify/cors": "^9.0.1",
+    "@types/node": "^22.5.4",
+    "@typescript-eslint/eslint-plugin": "6.19.1",
+    "@typescript-eslint/parser": "6.19.1",
+    "eslint": "8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "fastify-plugin": "^4.5.1",
+    "globals": "^15.9.0",
+    "nodemon": "^3.1.4",
+    "prettier": "^3.3.3",
+    "ts-node": "^10.9.2"
+  }
+}
